@@ -22,7 +22,7 @@ func RunWordlist(ctx context.Context, toNext chan<- *Task) error {
 	defer f.Close()
 
 	var fn func(string) string
-	if conf.C.RawTarget != conf.C.Target {
+	if strings.Contains(conf.C.RawTarget, "%") {
 		fn = func(word string) string {
 			return strings.ReplaceAll(conf.C.RawTarget, "%", word)
 		}
